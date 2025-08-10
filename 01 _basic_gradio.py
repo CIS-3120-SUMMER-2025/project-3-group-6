@@ -1,21 +1,27 @@
-# Save as 10+nyt_ollama_integration.py
 import gradio as gr
-import requests
-import os
-from dotenv import load_dotenv
-import json
+def process_text(input_text):
+    # Count words, characters, and do some basic processing
+    word_count = len(input_text.split())
+    char_count = len(input_text)
+    # Convert to uppercase as a simple transformation
+    processed_text = input_text.upper()
+    # Create a summary output
+    summary = f"Word count: {word_count}\nCharacter count: {char_count}"
+    return summary, processed_text
 
-# Load environment variables
-load_dotenv()
+# Create the interface
+demo = gr.Interface(
+    fn=process_text, # The function to wrap
+    inputs=gr.Textbox(lines=5, label="Enter your text here"), # Input
+component
+    outputs=[ 
+        gr.Textbox(label="Text Statistics"),
+        gr.Textbox(label="Processed Text")
+],
+title="Simple Text Processor", # Interface title
+description="Enter some text to see word count, character count, and
+processing."
+)
 
-# Get API key from environment
-NYT_API_KEY = os.getenv("NYT_API_KEY")
-if not NYT_API_KEY:
-    print("Warning: NYT_API_KEY not found in environment variables.")
-    print("Please create a .env file with your NYT API key.")
-
-# Global variable to store current articles
-current_articles = []
-
-def get_top_stories(section="home"):
-    
+if __name__ == "__main__":
+    demo.launch()
