@@ -12,6 +12,6 @@ AI-Enhanced Web App
 - Select one of the following writing forms from a drop-down menu: short story, journal, or poem
 - Click generate to obtain your Weather mood-based writing
 
-Code changes for public link:
+*Code changes for public link:
 -app.launch()
 + app.launch(share=True, debug= True)
